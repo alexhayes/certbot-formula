@@ -33,19 +33,9 @@ Install parameters file:
 
 Ensure that crontab entry for certificate renew is present:
   cron.present:
-    - name: /opt/certbot/certbot-auto renew >> /var/log/certbot-renew.log
+    - name: /opt/certbot/certbot-auto renew >> /var/log/certbot-renew.log && /bin/systemctl reload nginx
     - user: root
     - minute: 0
-    - hour: 3
-    - daymonth: '*'
-    - month: '*'
-    - dayweek: 1
-
-Ensure that crontab entry for reload configuration is present:
-  cron.present:
-    - name: /bin/systemctl reload nginx
-    - user: root
-    - minute: 10
     - hour: 3
     - daymonth: '*'
     - month: '*'
