@@ -1,5 +1,13 @@
 certbot:
-  server_name: westwing.com.br
-  webroot: /var/www/html
-  email: admin@westwing.com.br
-  test: False
+  certificates:
+    westwing.com.br:
+      server_name: westwing.com.br
+      webroot: /var/www/westwing.com.br
+      email: admin@westwing.com.br
+      test: False
+
+    westwing.co.uk:
+      server_name: westwing.co.uk
+      webroot: /var/www/westwing.co.uk
+      email: admin@westwing.co.uk
+      test: False

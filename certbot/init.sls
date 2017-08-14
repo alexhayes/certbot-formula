@@ -18,11 +18,13 @@ Generate strong Diffie-Hellman group:
     - name: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
     - unless: test -f /etc/ssl/certs/dhparam.pem
 
-Get certificate:
+{% for name, data in config.certificates.items() %}
+Get certificate - {{ name }}:
   cmd.run:
-    - name: ./certbot-auto certonly --webroot -w {{ config.webroot }} -d {{ config.server_name }} --non-interactive --agree-tos --email {{ config.email }}
+    - name: ./certbot-auto certonly --webroot -w {{ data.webroot }} -d {{ data.server_name }} --non-interactive --agree-tos --email {{ data.email }}
     - cwd: /opt/certbot
-    - unless: test -d /etc/letsencrypt/live/{{ config.server_name }}
+    - unless: test -d /etc/letsencrypt/live/{{ data.server_name }}
+{% endfor %}
 
 Install parameters file:
   file.managed:
